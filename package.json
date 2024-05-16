@@ -1,0 +1,130 @@
+{
+  "name": "trans-box",
+  "displayName": "Translator Toolbox",
+  "description": "A toolbox that helps you translate text based on paragraphs.",
+  "version": "0.2.0",
+  "publisher": "OlingCat",
+  "license": "MIT",
+  "preview": true,
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "translate",
+    "i18n",
+    "l10n",
+    "Markdown",
+    "reStructuredText",
+    "pandoc"
+  ],
+  "activationEvents": [
+    "onCommand:extension.duplicateAndTranslate"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": [
+      {
+        "title": "TranslatorToolbox",
+        "properties": {
+          "trans-box.enclose": {
+            "type": "object",
+            "default": {
+              "md": {
+                "start": "<!--",
+                "end": "-->"
+              }
+            },
+            "description": "Translator Toolbox: Enclosing paragraph with custom delimiters",
+            "scope": "resource"
+          },
+          "trans-box.enableTranslate": {
+            "type": "boolean",
+            "default": true,
+            "description": "Translator Toolbox: Auto translate",
+            "scope": "resource"
+          },
+          "trans-box.server": {
+            "type": "string",
+            "enum": [
+              "Gemini",
+              "Wenxin",
+              "Google",
+              "ChatGPT",
+              "Copilot"
+            ],
+            "default": "Gemini",
+            "description": "Translator Toolbox: Translate server",
+            "scope": "resource"
+          },
+          "trans-box.serverList": {
+            "type": "object",
+            "default": {
+              "Gemini": {
+                "prompt": "Please translate the following text into Chinese, and split your result to multiline every eighty characters:",
+                "key": "AIzaSyDmxzWfXmzuwGxKafYfAcP_94ty-PvFVAY"
+              }
+            },
+            "description": "Translator Toolbox: Translate server list",
+            "scope": "resource"
+          }
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "extension.translateAppend",
+        "title": "Duplicate current paragraph and translate it"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.translateAppend",
+        "key": "alt+d",
+        "mac": "cmd+d",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.89.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "bugs": {
+    "url": "https://github.com/OlingCat/trans-box/issues",
+    "email": "olingcat@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OlingCat/trans-box.git"
+  },
+  "homepage": "https://github.com/OlingCat/trans-box/blob/master/README.md",
+  "dependencies": {
+    "@google/generative-ai": "^0.11.1",
+    "axios": "^1.6.8",
+    "ts-pattern": "^5.1.1"
+  }
+}
