@@ -2,7 +2,7 @@
   "name": "trans-box",
   "displayName": "Translator Toolbox",
   "description": "A toolbox that helps you translate text based on paragraphs.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "OlingCat",
   "license": "MIT",
   "preview": true,
