@@ -16,8 +16,8 @@ export function activate(context: vscode.ExtensionContext) {
 
   // The command has been defined in the package.json file
   // The commandId parameter must match the command field in package.json
-  const transAppend =
-    commands.registerTextEditorCommand("extension.translateAppend", () => {
+  const transPaste =
+    commands.registerTextEditorCommand("extension.translatePaste", () => {
 
       const editor = window.activeTextEditor;
       if (!editor) {
@@ -25,33 +25,40 @@ export function activate(context: vscode.ExtensionContext) {
           "Open a file first to manipulate text selections");
         return;
       }
-      translateAppend(editor);
+      translatePaste(editor);
     });
 
   const rootPath = workspace.workspaceFolders?.at(0)?.uri.path;
 
-  context.subscriptions.push(transAppend);
+  context.subscriptions.push(transPaste);
+}
+
+// Translate or just return text
+async function getResult(currentText: string) {
+  if (config.get("enableTranslate")) {
+    let translated = await translateText(currentText)
+      .then((result) => {
+        return "\n\n" + result;
+      })
+      .catch((error) => {
+        window.showErrorMessage(error);
+        return undefined;
+      });
+  } else {
+    return "\n\n" + currentText;
+  }
 }
 
 // Translate current paragraph and append result bellow.
-async function translateAppend(editor: TextEditor) {
+async function translatePaste(editor: TextEditor) {
   const currentRange = getRange(editor);
   const currentText = editor.document.getText(currentRange);
-  
-  let translated = await translateText(currentText)
-    .then((res) => {
-      return "\n\n" + res;
-    })
-    .catch((error) => {
-      window.showErrorMessage(error);
-      return undefined;
-    });
 
   const fileName = editor.document.fileName;
   const fileExt = path.extname(fileName).slice(1);
 
   const enclosingDelimiters: any = config.get("enclose");
-
+  const translated = await getResult(currentText);
   // enclose with customed delimiters or just comment it
   if (translated) {
     if (fileExt in enclosingDelimiters) {

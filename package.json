@@ -29,6 +29,12 @@
       {
         "title": "TranslatorToolbox",
         "properties": {
+          "trans-box.enableTranslate": {
+            "type": "boolean",
+            "default": true,
+            "description": "Translator Toolbox: Enable auto translate",
+            "scope": "resource"
+          },
           "trans-box.enclose": {
             "type": "object",
             "default": {
@@ -38,12 +44,6 @@
               }
             },
             "description": "Translator Toolbox: Enclosing paragraph with custom delimiters",
-            "scope": "resource"
-          },
-          "trans-box.enableTranslate": {
-            "type": "boolean",
-            "default": true,
-            "description": "Translator Toolbox: Auto translate",
             "scope": "resource"
           },
           "trans-box.server": {
@@ -75,13 +75,13 @@
     ],
     "commands": [
       {
-        "command": "extension.translateAppend",
-        "title": "Duplicate current paragraph and translate it"
+        "command": "extension.translatePaste",
+        "title": "Translate current paragraph and paste result bellow."
       }
     ],
     "keybindings": [
       {
-        "command": "extension.translateAppend",
+        "command": "extension.translatePaste",
         "key": "alt+d",
         "mac": "cmd+d",
         "when": "editorTextFocus"
