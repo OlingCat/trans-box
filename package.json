@@ -89,6 +89,7 @@
     ]
   },
   "scripts": {
+    "webpack": "webpack",
     "vscode:prepublish": "pnpm run package",
     "compile": "webpack",
     "watch": "webpack --watch",
@@ -124,7 +125,6 @@
   "homepage": "https://github.com/OlingCat/trans-box/blob/master/README.md",
   "dependencies": {
     "@google/generative-ai": "^0.11.1",
-    "axios": "^1.6.8",
-    "ts-pattern": "^5.1.1"
+    "axios": "^1.6.8"
   }
 }

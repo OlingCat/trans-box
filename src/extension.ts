@@ -44,6 +44,7 @@ async function getResult(currentText: string) {
         window.showErrorMessage(error);
         return undefined;
       });
+    return translated;
   } else {
     return "\n\n" + currentText;
   }
