@@ -31,8 +31,8 @@
         "properties": {
           "trans-box.enableTranslate": {
             "type": "boolean",
-            "default": true,
-            "description": "Translator Toolbox: Enable auto translate",
+            "default": false,
+            "description": "Enable auto translate",
             "scope": "resource"
           },
           "trans-box.enclose": {
@@ -43,7 +43,7 @@
                 "end": "-->"
               }
             },
-            "description": "Translator Toolbox: Enclosing paragraph with custom delimiters",
+            "description": "Enclosing paragraph with custom delimiters",
             "scope": "resource"
           },
           "trans-box.server": {
@@ -56,7 +56,7 @@
               "Copilot"
             ],
             "default": "Gemini",
-            "description": "Translator Toolbox: Translate server",
+            "description": "Translate server",
             "scope": "resource"
           },
           "trans-box.serverList": {
